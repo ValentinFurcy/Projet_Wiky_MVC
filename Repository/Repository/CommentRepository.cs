@@ -20,7 +20,8 @@ namespace Repositories.Repository
         public async Task<Comment> CreateComment(Comment comment)
         {
             comment.DateCreate = DateTime.Now;
-           
+            comment.DateModified = DateTime.Now;
+
             context.Comments.Add(comment);
             await context.SaveChangesAsync();
             return comment;     

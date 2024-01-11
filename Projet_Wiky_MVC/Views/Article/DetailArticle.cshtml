@@ -30,7 +30,7 @@
                 <p class="card-text">@c.Contenu</p>
                 <p class="card-text strong">écrit par : @c.Auteur</p>
                 <p class="card-text">le : @c.DateCreate.ToShortDateString() , à @c.DateCreate.ToShortTimeString()</p>
-                @if (c.DateModified.ToShortDateString() != c.DateCreate.ToShortDateString() )
+                @if (c.DateModified.ToShortDateString() != c.DateCreate.ToShortDateString())
                 {
                     <p class="card-text">le : @c.DateModified.ToShortDateString() , à @c.DateModified.ToShortTimeString()</p>
                 }
