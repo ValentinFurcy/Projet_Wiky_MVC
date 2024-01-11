@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IRepositories
 {
-    public class ICommentRepository
+    public interface ICommentRepository
     {
     }
 }

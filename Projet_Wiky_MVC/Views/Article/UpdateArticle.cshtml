@@ -1,0 +1,27 @@
+﻿@model Article
+
+<div class="container">
+    <div class="card mb-5">
+        <h5 class="card-header">Modification de l'article</h5>
+        <div class="card-body">
+            <form asp-action="UpdateArticle">
+                <input asp-for="Id" type="hidden" />
+                <div class="col-md-3 mb-3">
+                    <label asp-for="Theme" class="form-label">Theme :</label>
+                    <input type="text" asp-for="Theme" class="form-control">
+                    <span asp-validation-for="Theme" class="text-danger"></span>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label asp-for="Auteur" class="form-label">Auteur :</label>
+                    <input type="text" asp-for="Auteur" class="form-control">
+                    <span asp-validation-for="Auteur" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Contenu" class="form-label">Contenu :</label>
+                    <textarea asp-for="Contenu" class="form-control"></textarea>
+                </div>
+                <button type="submit" class="btn btn-info">Envoyer</button>
+            </form>
+        </div>
+    </div>
+</div>

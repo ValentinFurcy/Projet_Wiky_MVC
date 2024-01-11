@@ -1,0 +1,20 @@
+﻿@model List<Article>
+
+<div class="container">
+    <h1 class="text-center">Voici l'enssemble des articles<h1>
+        <hr />
+        
+        <p>@TempData["Message"]</p>
+
+    @foreach(var a in Model)
+    {
+                <div class="card mb-5">
+                    <div class="card-body">
+                        <h5 class="card-title">@a.Theme</h5>
+                        <p class="card-text">@a.Contenu</p>
+                        <p class="card-text strong">écrit par : @a.Auteur</p>
+                        <a asp-action="DetailArticle" asp-route-id="@a.Id" class="btn btn-primary">Détail</a>
+                    </div>
+                </div>
+    }
+</div>

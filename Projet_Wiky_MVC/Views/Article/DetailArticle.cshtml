@@ -1,0 +1,29 @@
+﻿@model Article
+
+<div class="card mb-5">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Theme</h5>
+        <p class="card-text">@Model.Contenu</p>
+        <p class="card-text strong">écrit par : @Model.Auteur</p>
+        <p class="card-text">le : @Model.DateCreate.ToShortDateString() , à @Model.DateCreate.ToShortTimeString()</p>
+        <a asp-action="UpdateArticle" asp-route-id="@Model.Id" class="btn btn-primary">Modifier</a>
+        <a asp-action="DeleteArticle" asp-route-id="@Model.Id"><button onclick="return confirm('es tu sur ?');" class="btn btn-danger">Supprimer</button></a>
+        <a asp-action="CreateComment" asp-route-id="@Model.Id" class="btn btn-primary">Créer commentaire</a>
+        <a asp-action="Index" class="btn btn-primary">Retour</></a>
+    </div>
+</div>
+<hr />
+@foreach(var c in Model.Comments)
+{
+    <div class="card mb-5">
+        <div class="card-body">
+            <p class="card-text">@c.Contenu</p>
+            <p class="card-text strong">écrit par : @c.Auteur</p>
+            <p class="card-text">le : @c.DateCreate.ToShortDateString() , à @c.DateCreate.ToShortTimeString()</p>
+            @if(c.DateModified != null)
+            {
+                <p class="card-text">le : @c.DateModified.ToShortDateString() , à @c.DateModified.ToShortTimeString()</p>
+            }
+        </div>
+    </div>
+}
