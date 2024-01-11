@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IServices
 {
-    internal class ICommentService
+    public interface ICommentService
     {
     }
 }

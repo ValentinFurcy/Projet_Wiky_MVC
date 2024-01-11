@@ -24,7 +24,7 @@ namespace Repositories.Entity_Framework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var a1 = new Article() { Id = 1, Theme = "Animaux", Auteur = "Valentin", DateCreate = DateTime.Now,  Contenu = "Je préfére les animaux aux humains car ils sont fidéles"};
-            var a2 = new Article() { Id = 1, Theme = "Code", Auteur = "Valentin", DateCreate = DateTime.Now,  Contenu = "En développement tester s'est douter !!!"};
+            var a2 = new Article() { Id = 2, Theme = "Code", Auteur = "Valentin", DateCreate = DateTime.Now,  Contenu = "En développement tester s'est douter !!!"};
             
             modelBuilder.Entity<Article>().HasData(a1);
             modelBuilder.Entity<Article>().HasData(a2);
