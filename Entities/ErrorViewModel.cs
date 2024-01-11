@@ -1,4 +1,4 @@
-namespace Projet_Wiky_MVC.Models
+namespace Entities
 {
     public class ErrorViewModel
     {
