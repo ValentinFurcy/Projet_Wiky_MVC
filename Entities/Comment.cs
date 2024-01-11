@@ -10,6 +10,8 @@ namespace Entities
     public class Comment
     {
         public int Id { get; set; }
+        [Required]
+        [StringLength(30)]
         public string Auteur { get; set; }
         public DateTime DateCreate { get; set; }
         public DateTime DateModified { get; set; }

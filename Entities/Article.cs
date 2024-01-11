@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Entities
 {
@@ -11,6 +13,7 @@ namespace Entities
     {
         public int Id { get; set; }
         public string Theme { get; set; }
+        [Required]
         [StringLength(30)]
         public string Auteur { get; set; }
         public DateTime DateCreate { get; set; }
