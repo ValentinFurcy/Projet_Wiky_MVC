@@ -1,0 +1,14 @@
+﻿@model Article
+
+<div class="card mb-5">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Theme</h5>
+        <p class="card-text">@Model.Contenu</p>
+        <p class="card-text strong">écrit par : @Model.Auteur</p>
+        <p class="card-text">le : @Model.DateCreate.ToShortDateString() , à @Model.DateCreate.ToShortTimeString()</p>
+        <a asp-action="UpdateArticle" asp-route-id="@Model.Id" class="btn btn-primary">Modifier</a>
+        <a asp-action="DeleteArticle" asp-route-id="@Model.Id"><button onclick="return confirm('es tu sur ?');" class="btn btn-danger">Supprimer</button></a>
+        <a asp-controller="Comment" asp-action="CreateComment" asp-route-articleId="@Model.Id" class="btn btn-primary">Ajouter un commentaire</a>
+        <a asp-action="Index" class="btn btn-secondary">Retour</></a>
+    </div>
+</div>

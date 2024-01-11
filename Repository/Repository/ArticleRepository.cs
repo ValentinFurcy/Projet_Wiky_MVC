@@ -44,7 +44,7 @@ namespace Repositories.Repository
 
         public async Task<Article> GetArticleById(int id)
         {
-            return await context.Articles.FindAsync(id);
+            return await context.Articles.Include(a => a.Comments).FirstOrDefaultAsync(a => a.Id == id);
         }
 
         public async Task<Article> UpdateArticle(Article article)

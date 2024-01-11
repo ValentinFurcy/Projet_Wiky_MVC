@@ -13,8 +13,8 @@ namespace Entities
     public class Article
     {
         public int Id { get; set; }
-        
-
+        [Required]
+        //[Remote...]
         public string Theme { get; set; }
         [Required]
         [StringLength(30)]
@@ -23,6 +23,5 @@ namespace Entities
         public DateTime DateModified { get; set; }
         public string Contenu { get; set; }
         public List<Comment> Comments { get; set; }
-
     }
 }

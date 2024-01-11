@@ -1,0 +1,19 @@
+﻿@model Comment
+
+<div class="container">
+    <form asp-action="CreateComment" asp-controller="Comment">
+        <input asp-for="ArticleID" type="hidden"/>
+        <div class="col-md-3 mb-3">
+            <label asp-for="Auteur" class="form-label">Auteur</label>
+            <input type="text" asp-for="Auteur" class="form-control" id="inputTheme" placeholder="Auteur...">
+            <span asp-validation-for="Auteur" class="text-danger"></span>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="Contenu" class="form-label">Contenu</label>
+            <textarea asp-for="Contenu" class="form-control" id="inputContenu" placeholder="Contenu du commentaire..."></textarea>
+            <span asp-validation-for="Contenu" class="text-danger"></span>
+        </div>
+            <button type="submit" class="btn btn-info">Envoyer</button>
+            <button type="button" class="btn btn-warning" id="submitComment">Envoyer via Ajax</button>
+    </form>
+</div>
