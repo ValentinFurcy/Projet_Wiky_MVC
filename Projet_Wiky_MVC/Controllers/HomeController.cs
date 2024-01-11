@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Projet_Wiky_MVC.Models;
 using System.Diagnostics;
 
 namespace Projet_Wiky_MVC.Controllers
