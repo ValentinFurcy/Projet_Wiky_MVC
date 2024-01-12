@@ -84,7 +84,8 @@ namespace Projet_Wiky_MVC.Controllers
         {
             var article = await articleRepository.SearchByTheme(theme);
 
-            return PartialView("_detailArticle", article);
+            return View("SearchArticle", article);
+            //return PartialView("_detailArticle", article);
         }
 
     }
