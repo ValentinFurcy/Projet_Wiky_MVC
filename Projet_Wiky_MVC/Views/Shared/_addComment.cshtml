@@ -1,11 +1,11 @@
 ﻿@model Comment
 
 <div class="container">
-    <form asp-action="CreateComment" asp-controller="Comment">
-        <input asp-for="ArticleID" type="hidden"/>
+    <form asp-action="CreateComment" asp-controller="Comment" id="formCreateComment">
+        <input asp-for="ArticleID" type="hidden" id="inputArticleID"/>
         <div class="col-md-3 mb-3">
             <label asp-for="Auteur" class="form-label">Auteur</label>
-            <input type="text" asp-for="Auteur" class="form-control" id="inputTheme" placeholder="Auteur...">
+            <input type="text" asp-for="Auteur" class="form-control" id="inputAuteur" placeholder="Auteur...">
             <span asp-validation-for="Auteur" class="text-danger"></span>
         </div>
         <div class="col-md-3 mb-3">
@@ -14,6 +14,6 @@
             <span asp-validation-for="Contenu" class="text-danger"></span>
         </div>
             <button type="submit" class="btn btn-info">Envoyer</button>
-            <button type="button" class="btn btn-warning" id="submitComment">Envoyer via Ajax</button>
+            <button type="button" class="btn btn-warning" onclick="submitComment()">Envoyer via Ajax</button>
     </form>
 </div>

@@ -1,4 +1,4 @@
-﻿@model Article
+﻿@* @model Article
 
 <div class="card mb-5">
     <div class="card-body">
@@ -11,16 +11,16 @@
         <a asp-controller="Comment" asp-action="CreateComment" asp-route-articleId="@Model.Id" class="btn btn-primary">Ajouter un commentaire</a>
         <a asp-action="Index" class="btn btn-secondary">Retour</></a>
     </div>
-</div>
+</div> *@
+<partial name="_detailArticle" />
 <hr />
 <div>
     <partial name="_addComment" model="new Comment { ArticleID = Model.Id }" />
 </div>
 
-    
-
 <hr />
 <p style="color: green "><strong>@TempData["Message"]</strong></p>
+
 @if(Model.Comments != null)
 {
    @*  foreach (var c in Model.Comments)
@@ -45,9 +45,19 @@
     {
         <partial name="_comment" model="comment"/>
     }
+
+    
 }
 
 <script>
+    function submitComment() {
+        $.post('/Comment/CreateComment', {
+            Auteur: $('#inputAuteur').val(),
+            Contenu: $('#inputContenu').val(),
+            ArticleID: $('#inputArticleID').val()
+        } )
+    }
+    /////////
     $(function () {
         $('#submitComment').click(function () {
             var formData = {
