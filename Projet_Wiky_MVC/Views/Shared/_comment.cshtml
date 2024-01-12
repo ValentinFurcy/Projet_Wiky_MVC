@@ -1,0 +1,16 @@
+﻿@model Comment
+
+<div class="card mb-5">
+    <div class="card-body">
+        <p class="card-text">@Model.Contenu</p>
+        <p class="card-text strong">écrit par : @Model.Auteur</p>
+        <p class="card-text">le : @Model.DateCreate.ToShortDateString() , à @Model.DateCreate.ToShortTimeString()</p>
+        @if (Model.DateModified.ToShortDateString() != Model.DateCreate.ToShortDateString())
+        {
+            <p class="card-text">le : @Model.DateModified.ToShortDateString() , à @Model.DateModified.ToShortTimeString()</p>
+        }
+        <a asp-controller="Comment" asp-action="DeleteComment" asp-route-id="@Model.Id" asp-route-idArticle="@Model.Id">
+            <button type="submit" onclick="return confirm('es-tu sûr ?');" class="btn btn-danger">Supprimer</button>
+        </a>
+    </div>
+</div>

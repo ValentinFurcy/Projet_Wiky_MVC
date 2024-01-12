@@ -23,7 +23,7 @@
 <p style="color: green "><strong>@TempData["Message"]</strong></p>
 @if(Model.Comments != null)
 {
-    foreach (var c in Model.Comments)
+   @*  foreach (var c in Model.Comments)
     {
         <div class="card mb-5">
             <div class="card-body">
@@ -39,6 +39,11 @@
                 </a>
             </div>
         </div>
+    } *@
+
+    @foreach (var comment in Model.Comments)
+    {
+        <partial name="_comment" model="comment"/>
     }
 }
 
