@@ -8,8 +8,8 @@
         <div class="card-body">
             <h5 class="card-title">Recherche sur le theme</h5>
             <form asp-action="SearchByTheme" id="formSearch">
-                <input name="Theme" id="searchTheme" placeholder="Theme..." />
-                <button>Rechercher</button>
+                <input type="text" name="searchTheme" id="searchTheme" placeholder="Theme..." />
+               <button  class="btn btn-primary">Rechercher</button>
             </form>
         </div>
     </div>
@@ -18,19 +18,42 @@
 <div id="divContentArticle">
     @if(Model != null && Model.Count > 0)
     {
-        <partial name="_detailArticle" model="Model" />
-    }
-    
+        @* @foreach(var a in Model)
+        {
+            <div class="card mb-5">
+                <div class="card-body">
+                    <h5 class="card-title">@a.Theme</h5>
+                    <p class="card-text">@a.Contenu</p>
+                    <p class="card-text strong">écrit par : @a.Auteur</p>
+                    <p class="card-text">le : @a.DateCreate.ToShortDateString() , à @a.DateCreate.ToShortTimeString()</p>
+                    <a asp-controller="Article" asp-action="UpdateArticle" asp-route-id="@a.Id" class="btn btn-primary">Modifier</a>
+                    <a asp-controller="Article" asp-action="DeleteArticle" asp-route-id="@a.Id"><button onclick="return confirm('es tu sur ?');" class="btn btn-danger">Supprimer</button></a>
+                    <a asp-controller="Comment" asp-action="CreateComment" asp-route-articleId="@a.Id" class="btn btn-primary">Ajouter un commentaire</a>
+                </div>
+            </div>
+        } *@
+       
+        
+            <partial name="_detailArticle" model="Model"/>
+        
+        
+    }  
 </div>
 
 <script>
-
     $(function () {
-        $('#formSearch').submit(function (e) {
-            $.post('/Article/SearchByTheme', { theme: $('#searchTheme').val() }, function (data) {
-                $('#divContentArticle').html(data);
-            });
-
+        $('#formSearch button').click(function (e) {
+            var theme = $('#searchTheme').val();
+            console.log("je passe ici");
+            console.log("theme : " + theme);
+  
+            $.post('/Article/SearchByTheme', { theme })
+                .done(function (data) {
+                    $('#divContentArticle').html(data);
+                })
+                .fail(function (xhr, status, error) {
+                    console.error("Erreur lors de la requête AJAX :", error);
+                });
             e.preventDefault();
         });
 

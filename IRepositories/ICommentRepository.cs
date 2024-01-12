@@ -10,7 +10,7 @@ namespace IRepositories
     public interface ICommentRepository
     {
         Task<Comment> CreateComment(Comment comment);
-        Task DeleteComment(int id);
+        Task DeleteComment(int id);    
         Task<List<Comment>> GetByIdArticleAsync(int id);
     }
 }

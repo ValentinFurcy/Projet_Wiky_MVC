@@ -55,8 +55,6 @@ namespace Projet_Wiky_MVC.Controllers
             await commentRepository.DeleteComment(id);
             var commentToList = await commentRepository.GetByIdArticleAsync(idArticle);
 
-            //TempData["Message"] = "Le commentaire à bien été supprimé";
-
             return PartialView("_comment", commentToList);
 
         }
