@@ -1,86 +1,42 @@
-﻿@* @model Article
+﻿@model Article
 
-<div class="card mb-5">
-    <div class="card-body">
-        <h5 class="card-title">@Model.Theme</h5>
-        <p class="card-text">@Model.Contenu</p>
-        <p class="card-text strong">écrit par : @Model.Auteur</p>
-        <p class="card-text">le : @Model.DateCreate.ToShortDateString() , à @Model.DateCreate.ToShortTimeString()</p>
-        <a asp-action="UpdateArticle" asp-route-id="@Model.Id" class="btn btn-primary">Modifier</a>
-        <a asp-action="DeleteArticle" asp-route-id="@Model.Id"><button onclick="return confirm('es tu sur ?');" class="btn btn-danger">Supprimer</button></a>
-        <a asp-controller="Comment" asp-action="CreateComment" asp-route-articleId="@Model.Id" class="btn btn-primary">Ajouter un commentaire</a>
-        <a asp-action="Index" class="btn btn-secondary">Retour</></a>
-    </div>
-</div> *@
-<partial name="_detailArticle" />
+<partial name="_detailArticle" model="Model"/>
+
 <hr />
-<div>
-    <partial name="_addComment" model="new Comment { ArticleID = Model.Id }" />
+
+<partial name="_createComment" model="new Comment { ArticleID = Model.Id }" />
+
+<hr />
+
+<div id="divContentComments">
+    @if(Model.Comments != null)
+    {
+        <partial name="_comment" model="Model.Comments"/>
+    }    
 </div>
 
-<hr />
-<p style="color: green "><strong>@TempData["Message"]</strong></p>
-
-@if(Model.Comments != null)
-{
-   @*  foreach (var c in Model.Comments)
-    {
-        <div class="card mb-5">
-            <div class="card-body">
-                <p class="card-text">@c.Contenu</p>
-                <p class="card-text strong">écrit par : @c.Auteur</p>
-                <p class="card-text">le : @c.DateCreate.ToShortDateString() , à @c.DateCreate.ToShortTimeString()</p>
-                @if (c.DateModified.ToShortDateString() != c.DateCreate.ToShortDateString())
-                {
-                    <p class="card-text">le : @c.DateModified.ToShortDateString() , à @c.DateModified.ToShortTimeString()</p>
-                }
-                <a asp-controller="Comment" asp-action="DeleteComment" asp-route-id="@c.Id" asp-route-idArticle="@Model.Id">
-                    <button type="submit" onclick="return confirm('es-tu sûr ?');" class="btn btn-danger">Supprimer</button>
-                </a>
-            </div>
-        </div>
-    } *@
-
-    @foreach (var comment in Model.Comments)
-    {
-        <partial name="_comment" model="comment"/>
-    }
-
-    
-}
 
 <script>
     function submitComment() {
-        $.post('/Comment/CreateComment', {
+        var comment = {
             Auteur: $('#inputAuteur').val(),
             Contenu: $('#inputContenu').val(),
             ArticleID: $('#inputArticleID').val()
-        } )
-    }
-    /////////
-    $(function () {
-        $('#submitComment').click(function () {
-            var formData = {
-                Auteur: $('#inputAuteur').val(),
-                Contenu: $('#inputContenu').val(),
-                ArticleID: '@Model.Id'
-            };
+        };
 
-            console.log(formData);
-
-            $.ajax({
-                url: '/Comment/CreateComment',
-                method: 'POST',
-                data: formData,
-                success: function (comment) {
-                    console.log('succès :', comment);
-                },
-                error: function (error) {
-                    console.error('Erreur lors de l\'ajout du commentaire:', error);                
-                }
-            });
+        $.post('/Comment/CreateCommentAjax', { comment }, function (data) {
+            $('#divContentComments').html(data);
+            
         });
-    });
+    }
+
+    function deleteComment(id, idArticle) {
+ 
+        $.get('/Comment/DeleteCommentAjax', { id, idArticle }, function (data) {
+            console.log(data);
+            $('#divContentComments').html(data);
+        });
+    }
 </script>
 
 

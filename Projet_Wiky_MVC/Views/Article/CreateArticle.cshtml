@@ -1,5 +1,9 @@
 ﻿@model Article
 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
 <div class="container">
     <form asp-action="CreateArticle">
             <div class="col-md-3 mb-3">
@@ -15,6 +19,7 @@
             <div class="col-md-6 mb-3">
                 <label asp-for="Contenu" class="form-label">Contenu</label>
                 <textarea asp-for="Contenu" class="form-control" id="inputContenu" placeholder="Contenu de l'article..."></textarea>
+                <span asp-validation-for="Contenu" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-info">Envoyer</button>
     </form>

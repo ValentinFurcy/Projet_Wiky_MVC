@@ -11,5 +11,6 @@ namespace IRepositories
     {
         Task<Comment> CreateComment(Comment comment);
         Task DeleteComment(int id);
+        Task<List<Comment>> GetByIdArticleAsync(int id);
     }
 }

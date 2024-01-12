@@ -1,16 +1,20 @@
-﻿@model Comment
+﻿@model List<Comment>
 
-<div class="card mb-5">
-    <div class="card-body">
-        <p class="card-text">@Model.Contenu</p>
-        <p class="card-text strong">écrit par : @Model.Auteur</p>
-        <p class="card-text">le : @Model.DateCreate.ToShortDateString() , à @Model.DateCreate.ToShortTimeString()</p>
-        @if (Model.DateModified.ToShortDateString() != Model.DateCreate.ToShortDateString())
-        {
-            <p class="card-text">le : @Model.DateModified.ToShortDateString() , à @Model.DateModified.ToShortTimeString()</p>
-        }
-        <a asp-controller="Comment" asp-action="DeleteComment" asp-route-id="@Model.Id" asp-route-idArticle="@Model.Id">
-            <button type="submit" onclick="return confirm('es-tu sûr ?');" class="btn btn-danger">Supprimer</button>
-        </a>
+@foreach(var c in Model)
+{
+    <div class="card mb-5">
+        <div class="card-body">
+            <p class="card-text">@c.Contenu</p>
+            <p class="card-text strong">écrit par : @c.Auteur</p>
+            <p class="card-text">le : @c.DateCreate.ToShortDateString() , à @c.DateCreate.ToShortTimeString()</p>
+            @if (c.DateModified.ToShortDateString() != c.DateCreate.ToShortDateString())
+            {
+                <p class="card-text">le : @c.DateModified.ToShortDateString() , à @c.DateModified.ToShortTimeString()</p>
+            }
+            <a asp-controller="Comment" asp-action="DeleteComment" asp-route-id="@c.Id" asp-route-idArticle="@c.ArticleID">
+                <button type="submit" onclick="return confirm('es-tu sûr ?');" class="btn btn-danger">Supprimer</button>
+            </a>
+            <button onclick="return confirm('es-tu sûr ?') && deleteComment(@c.Id , @c.ArticleID);" class="btn btn-danger">Supprimer Via Ajax</button>                 
+        </div>
     </div>
-</div>
+}

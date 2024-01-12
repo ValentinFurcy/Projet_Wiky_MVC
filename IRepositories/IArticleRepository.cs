@@ -16,5 +16,6 @@ namespace IRepositories
         Task<Article> UpdateArticle(Article article);
         Task DeleteArticle(int id);
         Task<bool> IsUnique(string theme);
+        Task<Article> GetArticleByDateDesc();
     }
 }

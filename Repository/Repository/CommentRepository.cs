@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Repositories.Entity_Framework;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repositories.Repository
 {
@@ -35,6 +36,11 @@ namespace Repositories.Repository
                 context.Comments.Remove(commentToDelete);
                 await context.SaveChangesAsync();
             }
+        }
+
+        public async Task<List<Comment>> GetByIdArticleAsync(int idArticle)
+        {
+            return await context.Comments.Where(c => c.ArticleID == idArticle).ToListAsync();
         }
 
     }

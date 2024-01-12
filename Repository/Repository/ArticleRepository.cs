@@ -46,7 +46,10 @@ namespace Repositories.Repository
         {
             return await context.Articles.Include(a => a.Comments).FirstOrDefaultAsync(a => a.Id == id);
         }
-
+        public async Task<Article> GetArticleByDateDesc()
+        {
+            return await context.Articles.OrderByDescending(a => a.DateCreate).ThenByDescending(a => a.DateModified).FirstAsync();
+        }
         public async Task<bool> IsUnique(string theme)
         {
             return await context.Articles.AnyAsync(a => a.Theme == theme);

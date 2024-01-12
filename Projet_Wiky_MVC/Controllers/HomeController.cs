@@ -1,21 +1,26 @@
 using Entities;
+using IRepositories;
 using Microsoft.AspNetCore.Mvc;
+using Repositories.Repository;
 using System.Diagnostics;
 
 namespace Projet_Wiky_MVC.Controllers
 {
     public class HomeController : Controller
     {
+        IArticleRepository articleRepository;
+
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger , IArticleRepository IArticleRepository)
         {
             _logger = logger;
+            articleRepository = IArticleRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await articleRepository.GetArticleByDateDesc());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -23,5 +28,7 @@ namespace Projet_Wiky_MVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
+
 }

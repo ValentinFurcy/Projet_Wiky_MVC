@@ -24,12 +24,16 @@ namespace Projet_Wiky_MVC.Controllers
         {
             return View();
         }
+        public async Task<ActionResult> CheckUniqueTheme(string theme)
+        {
+            bool res = await articleRepository.IsUnique(theme);
+            return Json(!res);
+        }
         [HttpPost]
         public async Task<IActionResult> CreateArticle(Article article)
         {
-            if (!ModelState.IsValid)
-            {
-                ModelState.AddModelError("Theme", "ERROR CUSTOM");
+            if (!ModelState.IsValid || await articleRepository.IsUnique(article.Theme))
+            {            
                 return View(article);
             }
             else
@@ -43,7 +47,8 @@ namespace Projet_Wiky_MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> DetailArticle(int id)
         {
-            return View(await articleRepository.GetArticleById(id));
+            var article = await articleRepository.GetArticleById(id);
+            return View(article);
         }
 
         [HttpGet]
@@ -64,9 +69,11 @@ namespace Projet_Wiky_MVC.Controllers
         public async Task<IActionResult> DeleteArticle(int id)
         {
             await articleRepository.DeleteArticle(id);
-            TempData["Message"] = "L'article à bien été supprimé";
+            
             return RedirectToAction("Index");
         }
-        
+       
+
+
     }
 }

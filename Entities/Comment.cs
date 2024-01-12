@@ -10,13 +10,13 @@ namespace Entities
     public class Comment
     {
         public int Id { get; set; }
-        [Required]
-        [StringLength(30)]
+        [Required(ErrorMessage = "Auteur obligatoire")]
+        [StringLength(30, ErrorMessage = "Longueur Max=30")]
         public string Auteur { get; set; }
         public DateTime DateCreate { get; set; }
         public DateTime DateModified { get; set; }
-        [Required]
-        [StringLength(100)]
+        [Required(ErrorMessage = "Contenu obligatoire")]
+        [StringLength(100, ErrorMessage = "Longueur Max=100")]
         public string Contenu { get; set; }
         public int ArticleID { get; set; }
         public Article Article { get; set; }
