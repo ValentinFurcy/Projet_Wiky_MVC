@@ -15,6 +15,7 @@ namespace Entities
         public string Auteur { get; set; }
         public DateTime DateCreate { get; set; }
         public DateTime DateModified { get; set; }
+        [Required]
         [StringLength(100)]
         public string Contenu { get; set; }
         public int ArticleID { get; set; }

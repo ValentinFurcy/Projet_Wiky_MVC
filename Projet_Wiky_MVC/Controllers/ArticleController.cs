@@ -27,9 +27,17 @@ namespace Projet_Wiky_MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateArticle(Article article)
         {
-            article = await articleRepository.CreateArticle(article);
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("Theme", "ERROR CUSTOM");
+                return View(article);
+            }
+            else
+            {
+                article = await articleRepository.CreateArticle(article);
 
-            return RedirectToAction("DetailArticle", new { Id = article.Id});
+                return RedirectToAction("DetailArticle", new { Id = article.Id });
+            }           
         }
 
         [HttpGet]

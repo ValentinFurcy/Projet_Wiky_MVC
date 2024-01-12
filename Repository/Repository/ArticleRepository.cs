@@ -47,6 +47,11 @@ namespace Repositories.Repository
             return await context.Articles.Include(a => a.Comments).FirstOrDefaultAsync(a => a.Id == id);
         }
 
+        public async Task<bool> IsUnique(string theme)
+        {
+            return await context.Articles.AnyAsync(a => a.Theme == theme);
+        }
+
         public async Task<Article> UpdateArticle(Article article)
         {
             var articleUpdate = context.Articles.FirstOrDefault(a => a.Id == article.Id);

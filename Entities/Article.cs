@@ -14,7 +14,7 @@ namespace Entities
     {
         public int Id { get; set; }
         [Required]
-        //[Remote...]
+        [Remote("CheckUniqueTheme", "Article", ErrorMessage = "Ce theme éxiste déjà")]
         public string Theme { get; set; }
         [Required]
         [StringLength(30)]
