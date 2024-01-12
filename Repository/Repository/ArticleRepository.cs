@@ -50,6 +50,11 @@ namespace Repositories.Repository
         {
             return await context.Articles.OrderByDescending(a => a.DateCreate).ThenByDescending(a => a.DateModified).FirstAsync();
         }
+
+        public async Task<List<Article>> SearchByTheme(string theme)
+        {
+            return await context.Articles.Where(a => a.Theme.Contains(theme)).ToListAsync();
+        }
         public async Task<bool> IsUnique(string theme)
         {
             return await context.Articles.AnyAsync(a => a.Theme == theme);

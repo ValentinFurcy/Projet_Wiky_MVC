@@ -1,1 +1,38 @@
-﻿
+﻿@model List<Article>
+
+<div class="container">
+
+    <h1>Page de recherche</h1>
+
+    <div class="card mb-5">
+        <div class="card-body">
+            <h5 class="card-title">Recherche sur le theme</h5>
+            <form asp-action="SearchByTheme" id="formSearch">
+                <input name="Theme" id="searchTheme" placeholder="Theme..." />
+                <button>Rechercher</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="divContentArticle">
+    @if(Model != null && Model.Count > 0)
+    {
+        <partial name="_detailArticle" model="Model" />
+    }
+    
+</div>
+
+<script>
+
+    $(function () {
+        $('#formSearch').submit(function (e) {
+            $.post('/Article/SearchByTheme', { theme: $('#searchTheme').val() }, function (data) {
+                $('#divContentArticle').html(data);
+            });
+
+            e.preventDefault();
+        });
+
+    });
+</script>

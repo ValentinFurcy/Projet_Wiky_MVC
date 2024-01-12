@@ -72,8 +72,20 @@ namespace Projet_Wiky_MVC.Controllers
             
             return RedirectToAction("Index");
         }
-       
 
+        [HttpGet]
+        public async Task<IActionResult> SearchByTheme()
+        {         
+            return View("SearchArticle");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SearchByTheme(string theme)
+        {
+            var article = await articleRepository.SearchByTheme(theme);
+
+            return PartialView("_detailArticle", article);
+        }
 
     }
 }
