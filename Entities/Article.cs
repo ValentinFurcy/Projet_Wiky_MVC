@@ -23,6 +23,6 @@ namespace Entities
         public DateTime DateModified { get; set; }
         [Required(ErrorMessage = "Contenu obligatoire")]
         public string Contenu { get; set; }
-        public List<Comment> ?Comments { get; set; }
+        public List<Comment>? Comments { get; set; }
     }
 }
